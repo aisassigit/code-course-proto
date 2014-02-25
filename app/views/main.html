@@ -30,7 +30,14 @@
         <div class="col-md-10 column">
             <tabset>
                     <tab heading="Code Editor">
-                        <div ui-ace></div>
+                        <div ui-ace="{
+                              useWrapMode : true,
+                              showGutter: true,
+                              theme:'twilight',
+                              mode: 'xml',
+                              onLoad: aceLoaded,
+                              onChange: aceChanged
+                            }"></div>
                     </tab>
                     <tab heading="Profile">
                         Profile...

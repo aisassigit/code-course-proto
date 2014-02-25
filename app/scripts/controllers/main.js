@@ -7,6 +7,14 @@ angular.module('codeCourseProtoApp',['ui.ace','ui.bootstrap'])
       'AngularJS',
       'Karma'
     ];
+    $scope.aceLoaded = function(_editor) {
+        console.log('editor loaded...')
+    };
+
+    $scope.aceChanged = function(e) {
+        console.log('submit code here...')
+    };
+
   })
 
 
