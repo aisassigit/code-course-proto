@@ -8,11 +8,16 @@ angular.module('codeCourseProtoApp',['ui.ace','ui.bootstrap'])
       'Karma'
     ];
     $scope.aceLoaded = function(_editor) {
-        console.log('editor loaded...')
+        console.log('editor loaded...');
+        $scope.codeEdit = _editor;
     };
 
     $scope.aceChanged = function(e) {
         console.log('submit code here...')
+    };
+
+    $scope.saveCode = function(){
+        console.log($scope.codeEdit.getValue());
     };
 
   })
