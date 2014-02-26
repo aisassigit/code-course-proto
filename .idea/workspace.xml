@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb50e0e9-03cd-4aba-bd23-949abd9d9966" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/code-course-proto.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Node_js_Dependencies_for_code_course_proto.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="code-course-proto.iws" />
@@ -348,7 +339,11 @@
       <created>1393434537324</created>
       <updated>1393434537324</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed IDE files">
+      <created>1393435754827</created>
+      <updated>1393435754827</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -409,7 +404,8 @@
     </option>
     <MESSAGE value="Added events for editor" />
     <MESSAGE value="Moved button and feedback panel inside the editor tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved button and feedback panel inside the editor tab" />
+    <MESSAGE value="Removed IDE files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed IDE files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
