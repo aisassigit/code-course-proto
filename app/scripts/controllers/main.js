@@ -20,14 +20,15 @@ angular.module('codeCourseProtoApp',['ui.ace','ui.bootstrap'])
 
     $scope.saveCode = function(){
         var code = $scope.codeEdit.getValue();
-        var ln = $scope.codeEdit.selection.getCursor().row + 1;
-        var col = $scope.codeEdit.selection.getCursor().column;
-        console.log(code);
-        //fake http rest call
-        $scope.feedback = 'Error at line ' +ln+' : '+col;
-        //setTimeout(function(){return },30000)
+        if(code != ''){
+            var ln = $scope.codeEdit.selection.getCursor().row + 1;
+            var col = $scope.codeEdit.selection.getCursor().column;
+            $scope.feedback = 'Error at line: ' +ln+' : column: '+col;
+        }else{
+            $scope.feedback = '';
+        }
     };
 
-  })
+  });
 
 
