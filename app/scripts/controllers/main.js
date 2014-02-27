@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('codeCourseProtoApp',['ui.codemirror','ui.ace','ui.bootstrap'])
-  .controller('MainCtrl', function ($scope) {
+var appControllers = angular.module('appControllers', []);
+
+  appControllers.controller('MainCtrl',['$scope', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -56,25 +57,6 @@ angular.module('codeCourseProtoApp',['ui.codemirror','ui.ace','ui.bootstrap'])
             $scope.codeMirror.setValue('Terminal output')
         };
 
-  }).directive('onEnter',function(){
-
-        var linkFn = function(scope,element,attrs) {
-            element.bind("keypress", function(event) {
-                if(event.which === 13) {
-                    scope.$apply(function() {
-                        console.log('enter key press...');
-                        scope.onenter(event.currentTarget.value);
-                    });
-                }
-            });
-        };
-
-        return {
-            scope:{
-                onenter:'&onEnter'
-            },
-            link:linkFn
-        };
-    });
+  }]);
 
 

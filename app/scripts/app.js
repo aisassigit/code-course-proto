@@ -1,3 +1,9 @@
 'use strict';
 
-angular.module('codeCourseProtoApp', []);
+var app = angular.module('codeCourseProtoApp', [
+    'ui.codemirror',
+    'ui.ace',
+    'ui.bootstrap',
+    'appControllers',
+    'appDirectives'
+]);
