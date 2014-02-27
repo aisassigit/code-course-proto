@@ -29,29 +29,32 @@
         </div>
         <div class="col-md-10 column">
             <tabset>
-                    <tab heading="Code Editor">
-                        <div ui-ace="{
-                              useWrapMode : true,
-                              showGutter: true,
-                              theme:'twilight',
-                              mode: 'xml',
-                              onLoad: aceLoaded,
-                              onChange: aceChanged
-                            }"></div>
-                        <div style="padding:5px 0px 5px 0px">
-                            <button class="btn btn-primary" ng-click="saveCode()">Submit Code</button>
-                        </div>
-                        <div class="well" id="feedback">
-                            {{feedback}}
-                        </div>
-                    </tab>
-                    <tab heading="Profile">
-                        Profile...
-                    </tab>
-                    <tab heading="Messages">
-                        Messages...
-                    </tab>
+                <tab heading="Code Mirror Editor" select="showCodeMirror()">
+                    <!--<div ui-codemirror="{ onLoad : codemirrorLoaded }" ></div>-->
+                    Code mirror will not display inside a tab....
+                </tab>
+                <tab heading=" ACE Code Editor">
+                    <div ui-ace="{
+                          useWrapMode : true,
+                          showGutter: true,
+                          theme:'twilight',
+                          mode: 'xml',
+                          onLoad: aceLoaded,
+                          onChange: aceChanged
+                        }"></div>
+                    <div style="padding:5px 0px 5px 0px">
+                        <button class="btn btn-primary" ng-click="saveCode()">Submit Code</button>
+                    </div>
+                    <div class="well" id="feedback">
+                        {{feedback}}
+                    </div>
+                </tab>
+                <tab heading="Messages">
+                    Messages...
+                </tab>
             </tabset>
         </div>
     </div>
+    <div ui-codemirror="{ onLoad : codemirrorLoaded }" ></div>
+    <input type="text" size="20" on-enter="sendTerminal()">
 </div>
