@@ -1,3 +1,5 @@
+'use strict';
+
 var appDirectives = angular.module('appDirectives', []);
 
 appDirectives.directive('onEnter',[function(){

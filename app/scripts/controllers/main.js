@@ -2,18 +2,22 @@
 
 var appControllers = angular.module('appControllers', []);
 
-  appControllers.controller('AccordionCtrl',['$scope',function($scope){
+  appControllers.controller('AccordionCtrl',['$scope','Assignment',function($scope,Assignment){
       $scope.oneAtATime = true;
       $scope.groups = [
           {
-              title: "Instructions",
-              content: "These are the instructions"
+              title: 'Instructions',
+              content: 'These are the instructions'
           },
           {
-              title: "Starter Code",
-              content: "function(){}"
+              title: 'Starter Code',
+              content: 'function(){}'
           }
       ];
+      $scope.assignments = Assignment.query();
+      console.log($scope.assignments);
+
+
       $scope.items = ['Item 1', 'Item 2', 'Item 3'];
       $scope.addItem = function() {
           var newItemNo = $scope.items.length + 1;
@@ -23,12 +27,12 @@ var appControllers = angular.module('appControllers', []);
 
     appControllers.controller('TabsCtrl',['$scope',function($scope){
         $scope.tabs = [
-            { title:"Dynamic Title 1", content:"Dynamic content 1" },
-            { title:"Dynamic Title 2", content:"Dynamic content 2", disabled: true }
+            { title:'Dynamic Title 1', content:'Dynamic content 1' },
+            { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
         ];
 
         $scope.showCodeMirror = function(n) {
-            if($scope['codeMirror'+1] == undefined){
+            if($scope['codeMirror'+1] === undefined){
                 var cc = document.getElementById('cm'+n); //this is ugly as heck, but is how cm documentation shows init
                 var cm = CodeMirror.fromTextArea(cc);
                 // Options
@@ -53,7 +57,7 @@ var appControllers = angular.module('appControllers', []);
 
         $scope.saveCode = function(){
             var code = $scope.codeEdit.getValue();
-            if(code != ''){
+            if(code !== ''){
                 var ln = $scope.codeEdit.selection.getCursor().row + 1;
                 var col = $scope.codeEdit.selection.getCursor().column;
                 $scope.feedback = 'Error at line: ' +ln+' : column: '+col;

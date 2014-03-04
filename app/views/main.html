@@ -16,16 +16,20 @@
                     Open only one at a time
                 </label>
                 <accordion close-others="oneAtATime">
-                    <accordion-group heading="Assignment" is-open="true">
-                        This content is straight in the template.
-                    </accordion-group>
                     <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
                         {{group.content}}
                     </accordion-group>
+
                     <accordion-group heading="Reference Solution">
                         <p>Reference solution here...</p>
                         <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
                         <div ng-repeat="item in items">{{item}}</div>
+                    </accordion-group>
+                    <accordion-group heading="Assignments">
+                        <div ng-repeat="assignment in assignments" class="row clearfix">
+                            <span col-sm-4 column>{{assignment.name}}</span>
+                            <span col-sm-8 column>Due:{{assignment.dueDate}}</span>
+                        </div>
                     </accordion-group>
                     <accordion-group is-open="isopen">
                         <accordion-heading>
