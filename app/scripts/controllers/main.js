@@ -40,13 +40,32 @@ var appControllers = angular.module('appControllers', []);
                 cm.setOption('theme','night');
                 cm.setOption('lineNumbers',true);
                 cm.setSize(500, 100);
+                cm.setOption('extraKeys',{"Enter": function(){console.log('special Enter handling here...')}});
                 $scope['codeMirror'+n] = cm;
             }
         };
 
         $scope.aceLoaded = function(_editor) {
             console.log('editor loaded...');
-            //any programmatic configuration?
+
+            _editor.commands.addCommand({
+                name: 'enterKey',
+                bindKey: {win: 'Enter',  mac: 'Enter'},
+                exec: function(editor) {
+
+                    var code = $scope.codeEdit.getValue();
+                    if(code !== ''){
+                        var ln = $scope.codeEdit.selection.getCursor().row + 1;
+                        var col = $scope.codeEdit.selection.getCursor().column;
+                        $scope.codeEdit.setValue('Error at line: ' +ln+' : column: '+col);
+                    }else{
+                        $scope.codeEdit.setValue('');
+                    }
+
+                },
+                readOnly: true // false if this command should not apply in readOnly mode
+            });
+
             $scope.codeEdit = _editor;
         };
 
