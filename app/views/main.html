@@ -43,11 +43,9 @@
         <div class="col-md-8 column">
             <div ng-controller="TabsCtrl">
                 <tabset>
-                    <tab heading="Code Mirror Editor" select="showCodeMirror(0)">
-                        <textarea ui-codemirror="{ onLoad : codemirrorLoaded }" id="cm0"></textarea>
-                        Code mirror will not display inside a tab....
-                    </tab>
-                    <tab heading=" ACE Code Editor" select="showCodeMirror(1)">
+                    <button ng-click="addTab()" class="open">+</button>
+                    <tab ng-repeat="tab in tabs" active="tab.active" disabled="tab.disabled">
+                        <tab-heading>{{tab.title}}<button ng-click=closeTab(tab.id) class="close">&times;</button></tab-heading>
                         <div ui-ace="{
                               useWrapMode : true,
                               showGutter: true,
@@ -57,20 +55,19 @@
                               onChange: aceChanged
                             }"></div>
                         <div style="padding:5px 0px 5px 0px">
-                            <button class="btn btn-primary" ng-click="saveCode()">Submit Code</button>
+                            <button class="btn btn-primary" ng-click="saveCode(tab.id)">Submit Code</button>
                         </div>
                         <div class="well" id="feedback">
                             {{feedback}}
                         </div>
-
-                        <textarea ui-codemirror="{ onLoad : codemirrorLoaded }" id="cm1"></textarea>
-                        <input type="text" size="20" on-enter="sendTerminal()">
-                    </tab>
-                    <tab heading="Messages">
-                        Messages...
-                    </tab>
-                    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-                        {{tab.content}}
+                        <div ui-ace="{
+                              useWrapMode : true,
+                              showGutter: true,
+                              theme:'twilight',
+                              mode: 'xml',
+                              onLoad: terminalLoaded,
+                              onChange: terminalChanged
+                            }"></div>
                     </tab>
                 </tabset>
             </div>
