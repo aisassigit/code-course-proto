@@ -10,55 +10,59 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-4 column">
-            <div ng-controller="AccordionCtrl">
-                <label class="checkbox">
-                    <input type="checkbox" ng-model="oneAtATime">
-                    Open only one at a time
-                </label>
-                <accordion close-others="oneAtATime">
-                    <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
-                        {{group.content}}
-                    </accordion-group>
+                <tabset>
+                    <tab>
+                        <tab-heading>Assignment</tab-heading>
+                        <div ng-controller="AccordionCtrl">
+                            <accordion close-others="oneAtATime">
+                                <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                                    {{group.content}}
+                                </accordion-group>
 
-                    <accordion-group heading="Reference Solution">
-                        <p>Reference solution here...</p>
-                        <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
-                        <div ng-repeat="item in items">{{item}}</div>
-                    </accordion-group>
-                    <accordion-group heading="Assignments">
-                        <div ng-repeat="assignment in assignments" class="row clearfix">
-                            <span col-sm-4 column>{{assignment.name}}</span>
-                            <span col-sm-8 column>Due:{{assignment.dueDate}}</span>
+                                <accordion-group heading="Reference Solution">
+                                    <p>Reference solution here...</p>
+                                    <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                                    <div ng-repeat="item in items">{{item}}</div>
+                                </accordion-group>
+                                <accordion-group heading="Assignments">
+                                    <div ng-repeat="assignment in assignments" class="row clearfix">
+                                        <span col-sm-4 column>{{assignment.name}}</span>
+                                        <span col-sm-8 column>Due:{{assignment.dueDate}}</span>
+                                    </div>
+                                </accordion-group>
+                                <accordion-group is-open="isopen">
+                                    <accordion-heading>
+                                        Due Date<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                                    </accordion-heading>
+                                    April 15 2014
+                                </accordion-group>
+                            </accordion>
                         </div>
-                    </accordion-group>
-                    <accordion-group is-open="isopen">
-                        <accordion-heading>
-                            Due Date<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-                        </accordion-heading>
-                        April 15 2014
-                    </accordion-group>
-                </accordion>
-            </div>
+                    </tab>
+                    <tab>
+                        <tab-heading>Results</tab-heading>
+                        <div ng-controller="ResultsCtrl">
+                            {{results}}
+                        </div>
+                    </tab>
+                </tabset>
         </div>
         <div class="col-md-8 column">
             <div ng-controller="TabsCtrl">
                 <tabset>
                     <button ng-click="addTab()" class="open">+</button>
                     <tab ng-repeat="tab in tabs" active="tab.active" disabled="tab.disabled">
-                        <tab-heading>{{tab.title}}<button ng-click=closeTab(tab.id) class="close">&times;</button></tab-heading>
+                        <tab-heading>{{tab.title}}<button ng-click=closeTab(tab.id) ng-class="{{tab.id}} > 0 ? 'close' : 'hidden'">&times;</button></tab-heading>
                         <div ui-ace="{
                               useWrapMode : true,
                               showGutter: true,
                               theme:'twilight',
                               mode: 'xml',
-                              onLoad: aceLoaded,
-                              onChange: aceChanged
+                              onLoad: editorLoaded,
+                              onChange: editorChanged
                             }"></div>
                         <div style="padding:5px 0px 5px 0px">
                             <button class="btn btn-primary" ng-click="saveCode(tab.id)">Submit Code</button>
-                        </div>
-                        <div class="well" id="feedback">
-                            {{feedback}}
                         </div>
                         <div ui-ace="{
                               useWrapMode : true,

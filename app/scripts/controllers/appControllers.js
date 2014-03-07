@@ -25,7 +25,7 @@ var appControllers = angular.module('appControllers', []);
       };
   }]);
 
-    appControllers.controller('TabsCtrl',['$scope',function($scope){
+    appControllers.controller('TabsCtrl',['$scope','resultsService',function($scope,resultsService){
         $scope.tabs = [
             {title:'Editor',content:'', id:0, active:true}
         ];
@@ -34,7 +34,6 @@ var appControllers = angular.module('appControllers', []);
         $scope.addTab = function(){
             var tabId = $scope.tabs.length;
             var tabLabel = tabId+1;
-            //console.log('next tab id: '+tabId)
             $scope.tabs.splice(tabId,0,{title:'Editor '+tabLabel, content:'', id:tabId, active:true});
         },
         $scope.closeTab = function(id){
@@ -43,19 +42,16 @@ var appControllers = angular.module('appControllers', []);
                 $scope.tabs.splice(id,1);
             }
         },
-
-        $scope.aceLoaded = function(_editor) {
+        $scope.editorLoaded = function(_editor) {
             console.log('instance of editor loaded...');
             $scope.editors.push(_editor);
         };
-
         $scope.terminalLoaded = function(_editor){
             _editor.commands.addCommand({
                 name: 'enterKey',
                 bindKey: {win: 'Enter',  mac: 'Enter'},
                 exec: function() {
-                    var terminalInst, code, ln, col;
-                    //terminalInst = $scope.terminals[id];
+                    var code, ln, col;
                     code = _editor.getValue();
                     if(code !== ''){
                         ln = _editor.selection.getCursor().row + 1;
@@ -70,9 +66,8 @@ var appControllers = angular.module('appControllers', []);
             });
             $scope.terminals.push(_editor)
         },
-
-        $scope.aceChanged = function(e) {
-            console.log('submit code here...');
+        $scope.editorChanged = function(_editor) {
+            console.log('editor instance changed'+_editor);
             //any actions that need to take place on console change?
         };
 
@@ -88,9 +83,10 @@ var appControllers = angular.module('appControllers', []);
             if(code !== ''){
                 ln = editorInst.selection.getCursor().row + 1;
                 col = editorInst.selection.getCursor().column;
-                $scope.feedback = 'Error at line: ' +ln+' : column: '+col;
+                resultsService.setResult('Error at line: ' +ln+' : column: '+col);
+                console.log('event sent on id:'+id);
             }else{
-                $scope.feedback = '';
+                resultsService.setResult('');
             }
         };
 
@@ -102,13 +98,19 @@ var appControllers = angular.module('appControllers', []);
 
     }]);
 
+  appControllers.controller('ResultsCtrl',['$scope','resultsService',function($scope,resultsService){
+      $scope.results = 'No code submit yet...'
+      $scope.$on('handleResult',function(){
+          $scope.results = resultsService.result;
+      })
+  }]);
+
   appControllers.controller('MainCtrl',['$scope', function ($scope) {
-    $scope.awesomeThings = [
+    $scope.initArrTest = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
   }]);
 
 
