@@ -13,13 +13,13 @@ module.exports = function(config) {
     files: [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/bower_components/angular-ui-ace/ui-ace.js',
+      'app/bower_components/angular-resource/angular-resource.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js',
-      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'app/bower_components/angular-ui-ace/ui-ace.js',
-      'app/bower_components/angular-ui-codemirror/ui-codemirror.js'
+      'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude
