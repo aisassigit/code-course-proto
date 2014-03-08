@@ -14,8 +14,9 @@ var appControllers = angular.module('appControllers', []);
               content: 'function(){}'
           }
       ];
-      $scope.assignments = Assignment.query();
-      console.log($scope.assignments);
+      $scope.assignments = [];
+      //$scope.assignments = Assignment.query();
+      //console.log($scope.assignments);
 
 
       $scope.items = ['Item 1', 'Item 2', 'Item 3'];
@@ -33,13 +34,21 @@ var appControllers = angular.module('appControllers', []);
         $scope.terminals = [];
         $scope.addTab = function(){
             var tabId = $scope.tabs.length;
-            var tabLabel = tabId+1;
+            var tabLabel = tabId;
             $scope.tabs.splice(tabId,0,{title:'Editor '+tabLabel, content:'', id:tabId, active:true});
         },
         $scope.closeTab = function(id){
-            //console.log('remove id: '+id);
-            if($scope.tabs.length !== 1){
-                $scope.tabs.splice(id,1);
+            var len,i,tab;
+            len = $scope.tabs.length;
+            if(id !== 0){
+                for(i=1;i<len;i++){ //may need to add underscore lib for loops, filters
+                    tab = $scope.tabs[i];
+                    if(tab !== undefined){
+                        if(tab.id === id){
+                            $scope.tabs.splice(i,1);
+                        }
+                    }
+                }
             }
         },
         $scope.editorLoaded = function(_editor) {
