@@ -8,7 +8,8 @@
     "jquery": "~1.10.2",
     "bootstrap": "~3.0.3",
     "angular-bootstrap": "~0.10.0",
-    "angular-resource": "~1.2.14"
+    "angular-resource": "~1.2.14",
+    "angular-ui-ace": "bower"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
