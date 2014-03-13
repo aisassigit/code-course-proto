@@ -4,8 +4,8 @@
 
 var appServices = angular.module('appServices',['ngResource']);
 
-appServices.factory('Assignment',['$resource',function($resource){
-    //return $resource('http://localhost/~aisassi/code-course-proto/data/assignments.json',{'query':{method:'GET',isArray:true}});
+appServices.factory('Assignment',['$resource','REST_API_ROOT',function($resource,REST_API_ROOT){
+    return $resource(REST_API_ROOT+'assignments.json',{'query':{method:'GET',isArray:true}});
 }]);
 
 

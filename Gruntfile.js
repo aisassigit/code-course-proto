@@ -9,6 +9,9 @@
 
 module.exports = function (grunt) {
 
+  //load ng-constants to enable build targets
+  grunt.loadNpmTasks('grunt-ng-constant');
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -17,6 +20,32 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+      ngconstant: {
+          options: {
+              space: '  '
+          },
+
+          // targets
+          development: [{
+              dest: '<%= yeoman.app %>/scripts/config.js',
+              wrap: '"use strict";\n\n <%= __ngModule %>',
+              name: 'config',
+              constants: {
+                  TARGET:'dev',
+                  REST_API_ROOT: 'http://localhost/~aisassi/rest-api-mock/'
+              }
+          }],
+          production: [{
+              dest: '<%= yeoman.dist %>/scripts/config.js',
+              wrap: '"use strict";\n\n <%= __ngModule %>',
+              name: 'config',
+              constants: {
+                  TARGET:'prod',
+                  REST_API_ROOT: 'http://prodserver/restapi/rest-api/'
+              }
+          }]
+      },
 
     // Project settings
     yeoman: {
@@ -146,10 +175,6 @@ module.exports = function (grunt) {
         ignorePath: '<%= yeoman.app %>/'
       }
     },
-
-
-
-
 
     // Renames files for browser caching purposes
     rev: {
@@ -337,6 +362,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'bower-install',
       'concurrent:server',
       'autoprefixer',
@@ -360,6 +386,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'bower-install',
     'useminPrepare',
     'concurrent:dist',

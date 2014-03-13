@@ -6,5 +6,6 @@ var app = angular.module('codeCourseProtoApp', [
     'ui.bootstrap',
     'appControllers',
     'appDirectives',
-    'appServices'
+    'appServices',
+    'config'
 ]);

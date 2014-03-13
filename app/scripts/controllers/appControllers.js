@@ -2,7 +2,7 @@
 
 var appControllers = angular.module('appControllers', []);
 
-  appControllers.controller('AccordionCtrl',['$scope','Assignment',function($scope,Assignment){
+  appControllers.controller('AccordionCtrl',['$scope','Assignment','TARGET',function($scope,Assignment,TARGET){
       $scope.oneAtATime = true;
       $scope.groups = [
           {
@@ -14,11 +14,17 @@ var appControllers = angular.module('appControllers', []);
               content: 'function(){}'
           }
       ];
-      $scope.assignments = [];
-      //$scope.assignments = Assignment.query();
-      //console.log($scope.assignments);
-
-
+      switch (TARGET) {
+          case 'dev':
+            $scope.assignments = Assignment.query();
+            break;
+          case 'prod':
+            $scope.assignments = [];
+            break;
+          default:
+              $scope.assignments = [];
+      }
+      console.log(TARGET+'--'+$scope.assignments);
       $scope.items = ['Item 1', 'Item 2', 'Item 3'];
       $scope.addItem = function() {
           var newItemNo = $scope.items.length + 1;
